@@ -1,0 +1,26 @@
+{
+  "babosas": {
+    "name": "babosas",
+    "url": "http://www.babosas.biz",
+    "nats_webcam": "MjYwNS4xLjI1LjQzLjAuMC4wLjAuMZ",
+    "nats_cumloader": "MjYwNS4xLjI1LjQzLjAuMC4wLjAuMY",
+    "css": "babosas",
+    "ga": "UA-26020144-21"
+  },
+  "cerdas": {
+    "name": "cerdas",
+    "url": "http://www.cerdas.com",
+    "nats_webcam": "MjYwNS4xLjI1LjQzLjAuMC4wLjAuMX",
+    "nats_cumloader": "MjYwNS4xLjI1LjQzLjAuMC4wLjAuMW",
+    "css": "cerdas",
+    "ga": "UA-26020144-22"
+  },
+  "conejox": {
+    "name": "conejox",
+    "url": "http://www.conejox.com",
+    "nats_webcam": "MjYwNS4xLjI1LjQzLjAuMC4wLjAuMA",
+    "nats_cumloader": "MjYwNS4xLjI1LjQzLjAuMC4wLjAuMB",
+    "css": "conejox",
+    "ga": "UA-26020144-23"
+  }
+}
