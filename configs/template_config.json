@@ -1,4 +1,6 @@
 {
+  "template_folder": "templates",
+  "url_join": "http://webcams.cumlouder.com/joinmb/cumlouder/",
   "template_head": "header.html",
   "template_body": "girl_list.html",
   "template_footer": "footer.html",

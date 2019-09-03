@@ -1,7 +1,5 @@
 {
   "affiliate_file": "../configs/afiliates.json",
   "url_chicas": "http://webcams.cumlouder.com/feed/webcams/online/61/1/",
-  "template_folder": "templates",
-  "url_cumlauder": "https://www.cumlouder.com/",
-  "url_webcam": "http://webcams.cumlouder.com/joinmb/cumlouder/"
+  "url_cumlauder": "https://www.cumlouder.com/"
 }
