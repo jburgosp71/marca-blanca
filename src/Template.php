@@ -2,12 +2,14 @@
 
 namespace WhiteBrand;
 
+//require "GirlsInfo.php";
+
 class Template
 {
     private $templateConfig;
     private $affiliateConfig;
 
-    public function __construct ($templateConfig, $affiliateConfig)
+    public function __construct ($templateConfig, $affiliateConfig, GirlsInfo $girlsInfo)
     {
         $this->templateConfig = $templateConfig;
         $this->affiliateConfig = $affiliateConfig;
