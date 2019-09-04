@@ -1,5 +1,7 @@
 <?php
 
+namespace WhiteBrand;
+
 class JsonFile
 {
     private $jsonFile;

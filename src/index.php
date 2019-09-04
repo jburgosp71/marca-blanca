@@ -1,7 +1,9 @@
 <?php
-require "JsonFile.php";
-require "Template.php";
-require "ParseUrl.php";
+require_once "../vendor/autoload.php";
+
+use WhiteBrand\JsonFile;
+use WhiteBrand\ParseUrl;
+use WhiteBrand\Template;
 
 $config = json_decode(JsonFile::openJson("../configs/config.json")->getContent());
 $template_config = json_decode(JsonFile::openJson("../configs/template_config.json")->getContent());

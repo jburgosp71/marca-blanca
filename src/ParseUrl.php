@@ -1,5 +1,7 @@
 <?php
 
+namespace WhiteBrand;
+
 class ParseUrl
 {
     private $siteName;
