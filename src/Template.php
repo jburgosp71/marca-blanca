@@ -67,6 +67,8 @@ class Template
             TRUE
         );
 
+        $footer = str_replace('{{ ga_code }}', $this->affiliateConfig->ga, $footer);
+
         return $footer;
     }
 }
