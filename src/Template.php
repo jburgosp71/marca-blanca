@@ -2,17 +2,17 @@
 
 namespace WhiteBrand;
 
-//require "GirlsInfo.php";
-
 class Template
 {
     private $templateConfig;
     private $affiliateConfig;
+    private $webcamsUrl;
 
-    public function __construct ($templateConfig, $affiliateConfig, WebcamGrid $girlsInfo)
+    public function __construct ($templateConfig, $affiliateConfig, $webcamsUrl)
     {
         $this->templateConfig = $templateConfig;
         $this->affiliateConfig = $affiliateConfig;
+        $this->webcamsUrl = $webcamsUrl;
     }
 
     public function getHeader()
@@ -38,6 +38,22 @@ class Template
             $this->templateConfig->template_body,
             TRUE
         );
+
+        $pieceGrid = file_get_contents(
+            $this->templateConfig->template_folder .
+            '/' .
+            $this->templateConfig->template_piece,
+            TRUE
+        );
+
+        $webcamGrid = WebcamGrid::take(
+            $this->webcamsUrl,
+            $pieceGrid,
+            $this->templateConfig,
+            $this->affiliateConfig
+        );
+
+        $body = str_replace('{{ girl_list }}', $webcamGrid->makeGrid(), $body);
 
         return $body;
     }

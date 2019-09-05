@@ -1,14 +1,15 @@
 {
   "template_folder": "templates",
-  "url_join": "http://webcams.cumlouder.com/joinmb/cumlouder/",
+  "url_join": "//webcams.cumlouder.com/joinmb/cumlouder/",
+    "image_source": "//w0.imgcm.com/modelos/",
   "template_head": "header.html",
   "template_body": "girl_list.html",
   "template_footer": "footer.html",
   "template_piece": "piece.html",
   "class_big_image": "chica-grande",
   "class_big_image_derecha": "chica-grande grande-derecha",
-  "normal_with": "175",
+  "normal_width": "175",
   "normal_height": "150",
-  "big_with": "357",
+  "big_width": "357",
   "big_height": "307"
 }

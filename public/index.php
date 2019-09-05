@@ -10,10 +10,10 @@ $config = json_decode(JsonFile::openJson("../configs/config.json")->getContent()
 $template_config = json_decode(JsonFile::openJson("../configs/template_config.json")->getContent());
 $affiliates = json_decode(JsonFile::openJson($config->affiliate_file)->getContent());
 
-$affiliate=ParseUrl::getHost()->getNameHost();
+$affiliate = ParseUrl::getHost()->getNameHost();
 
 if(!empty($affiliates->$affiliate)){
-    $templateInfo = new Template($template_config, $affiliates->$affiliate);
+    $templateInfo = new Template($template_config, $affiliates->$affiliate, $config->webcams_url);
     $html = $templateInfo->getHeader() . $templateInfo->getBody() . $templateInfo->getFooter();
     echo $html;
 } else {
