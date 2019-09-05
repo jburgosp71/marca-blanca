@@ -9,7 +9,7 @@ class Template
     private $templateConfig;
     private $affiliateConfig;
 
-    public function __construct ($templateConfig, $affiliateConfig, GirlsInfo $girlsInfo)
+    public function __construct ($templateConfig, $affiliateConfig, WebcamGrid $girlsInfo)
     {
         $this->templateConfig = $templateConfig;
         $this->affiliateConfig = $affiliateConfig;

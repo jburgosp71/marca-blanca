@@ -26,13 +26,13 @@ FROM php:7.2-apache
 #    && rm -rf /var/lib/apt/lists/* \
 #    && apt-get clean
 
-#COPY src/*.php /var/www/html/
-COPY index.php /var/www/html/
+COPY public /var/www/html/public/
 COPY src /var/www/html/src/
-COPY configs /var/www/configs/
-COPY css /var/www/html/css/
-COPY templates /var/www/html/templates/
+COPY configs /var/www/html/configs/
 RUN chmod -R 755 /var/www/html/
-RUN chmod -R 755 /var/www/configs/
 
 COPY --from=backend /app /var/www/html/
+
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
