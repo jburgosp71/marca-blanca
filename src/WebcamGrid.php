@@ -8,6 +8,7 @@ class WebcamGrid
     private $pieceHtml;
     private $templateConfig;
     private $affiliateConfig;
+    private $memcache;
 
     private function __construct(string $url, string $pieceHtml, $templateConfig, $affiliateConfig)
     {
@@ -15,6 +16,9 @@ class WebcamGrid
         $this->pieceHtml = $pieceHtml;
         $this->templateConfig = $templateConfig;
         $this->affiliateConfig = $affiliateConfig;
+
+        $this->memcache = new \Memcache;
+        $this->memcache->connect('127.0.0.1', 11211) or die ("Unable to connect to Memcached");
     }
 
     public static function take(string $url, string $pieceHtml, $templateConfig, $affiliateConfig): self
@@ -44,8 +48,23 @@ class WebcamGrid
         return $gridElement;
     }
 
+    private function getGridCache($key)
+    {
+        return $this->memcache->get($key);
+    }
+
+    private function setGridCache($key, $value, $expire = 900)
+    {
+        return $this->memcache->set($key, $value, false, $expire);
+    }
+
     public function makeGrid(): string
     {
+        if ($this->getGridCache("gridContent") === true)
+        {
+            return $this->getGridCache("gridContent");
+        }
+
         $allWebcams = $this->getJson();
 
         $noClass = "";
@@ -155,6 +174,7 @@ class WebcamGrid
             */
         }
 
+        $this->setGridCache("gridContent", $gridContent, 900);
         return $gridContent;
     }
 }
