@@ -2,13 +2,15 @@
 
 namespace WhiteBrand;
 
+use Memcached;
+
 class WebcamGrid
 {
     private $jsonUrl;
     private $pieceHtml;
     private $templateConfig;
     private $affiliateConfig;
-    private $memcache;
+    private $memcached;
 
     private function __construct(string $url, string $pieceHtml, $templateConfig, $affiliateConfig)
     {
@@ -17,8 +19,8 @@ class WebcamGrid
         $this->templateConfig = $templateConfig;
         $this->affiliateConfig = $affiliateConfig;
 
-        $this->memcache = new \Memcache;
-        $this->memcache->connect('127.0.0.1', 11211) or die ("Unable to connect to Memcached");
+        $this->memcached = new Memcached();
+        $this->memcached->addServer('127.0.0.1', 11211) or die ("Unable to connect to Memcached");
     }
 
     public static function take(string $url, string $pieceHtml, $templateConfig, $affiliateConfig): self
@@ -50,12 +52,12 @@ class WebcamGrid
 
     private function getGridCache($key)
     {
-        return $this->memcache->get($key);
+        return $this->memcached->get($key);
     }
 
     private function setGridCache($key, $value, $expire = 900)
     {
-        return $this->memcache->set($key, $value, false, $expire);
+        return $this->memcached->set($key, $value, $expire);
     }
 
     public function makeGrid(): string
@@ -162,16 +164,6 @@ class WebcamGrid
                 continue;
             }
             $lineCount = 0;
-            /*
-            $lineCount = 1;
-            $gridElement = str_replace('{{ special_class }}', '', $gridElement);
-            $gridElement = str_replace('{{ url_girl }}', $urlJoin . $thumb->wbmerPermalink, $gridElement);
-            $gridElement = str_replace('{{ image_girl }}', $thumb->wbmerThumb2, $gridElement);
-            $gridElement = str_replace('{{ name_girl }}', $thumb->wbmerNick, $gridElement);
-            $gridElement = str_replace('{{ width }}', 175, $gridElement);
-            $gridElement = str_replace('{{ height }}', 150, $gridElement);
-            $gridContent = $gridContent . $gridElement;
-            */
         }
 
         $this->setGridCache("gridContent", $gridContent, 900);
