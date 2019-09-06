@@ -25,14 +25,22 @@ RUN apt-get update && apt-get install -y libmemcached11 libmemcachedutil2 libmem
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
+RUN apt-get update && apt-get install -y memcached
+
+EXPOSE 11211
 
 COPY public /var/www/html/public/
 COPY src /var/www/html/src/
 COPY configs /var/www/html/configs/
+COPY wrapper.sh /usr/bin/wrapper.sh
+
 RUN chmod -R 755 /var/www/html/
+RUN chmod 777 /usr/bin/wrapper.sh
 
 COPY --from=backend /app /var/www/html/
 
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+CMD /usr/bin/wrapper.sh

@@ -57,14 +57,15 @@ class WebcamGrid
 
     private function setGridCache($key, $value, $expire = 900)
     {
-        return $this->memcached->set($key, $value, $expire);
+        return $this->memcached->set($key, $value, $expire) or die ("Unable to set to Memcached");
     }
 
     public function makeGrid(): string
     {
-        if ($this->getGridCache("gridContent") === true)
+        $gridContent = $this->getGridCache("gridContent");
+        if ($gridContent)
         {
-            return $this->getGridCache("gridContent");
+            return $gridContent;
         }
 
         $allWebcams = $this->getJson();
